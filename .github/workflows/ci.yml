@@ -5,6 +5,7 @@ on:
     branches:
       - "master"
       - "api-only"
+      - "revert-1718-cacheshardstest"
   pull_request:
     branches: "*"
 
