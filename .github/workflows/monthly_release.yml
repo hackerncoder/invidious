@@ -14,7 +14,10 @@ jobs:
                         - uses: actions/checkout@v2
                           with: 
                                 ref: ${{ steps.date.outputs.date }}
-
+                                fetch-depth: 0
+                        
+                        - run: git --no-pager log --no-decorate --oneline $(git describe --tags --abbrev=0)..HEAD > output.log
+                        
                         - uses: actions/create-release@latest
                           env:
                                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -23,3 +26,4 @@ jobs:
                                   release_name: ${{ steps.date.outputs.date }}
                                   draft: false
                                   prerelease: false
+                                  body_path: output.log
